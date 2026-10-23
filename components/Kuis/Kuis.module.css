@@ -1,0 +1,507 @@
+/* Styling komponen Kuis. Token desain diambil dari app/globals.css. */
+
+.kuis {
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.eyebrowRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent-text);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.counter {
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: clamp(1.22rem, 2.4vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.meta {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.status {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Mulai ---------- */
+
+.start {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-muted);
+}
+
+.startIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.startTextWrap {
+  flex: 1;
+  min-width: 200px;
+}
+
+.startTitle {
+  font-weight: 700;
+}
+
+.startText {
+  margin-top: 2px;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---------- Status memuat ---------- */
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-strong);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: putar 700ms linear infinite;
+}
+
+@keyframes putar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Galat ---------- */
+
+.error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(185, 28, 28, 0.18);
+  border-radius: var(--radius-md);
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 0.9rem;
+}
+
+/* ---------- Progres ---------- */
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.progress {
+  flex: 1;
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-muted);
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-image: var(--gradient-primary);
+  transition: width 240ms var(--ease);
+}
+
+.progressText {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Daftar soal ---------- */
+
+.soalList {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.soal {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.soalBenar {
+  border-color: #86efac;
+  background-color: #f7fdf9;
+}
+
+.soalSalah {
+  border-color: #fca5a5;
+  background-color: #fffafa;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.legend {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 0;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.legendIndex {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border-radius: 9px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.pilihan {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.opsi {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 11px 13px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.opsi:hover {
+  border-color: var(--color-border-strong);
+  background-color: rgba(238, 241, 251, 0.55);
+}
+
+.opsi:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.opsi input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opsiLetter {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.opsiText {
+  flex: 1;
+  padding-top: 2px;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.opsiMark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.opsiMark svg {
+  color: #ffffff;
+}
+
+.opsiDipilih {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.opsiDipilih .opsiLetter {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.opsiBenar {
+  border-color: #16a34a;
+  background-color: #f0fdf4;
+  color: #14532d;
+}
+
+.opsiBenar .opsiLetter {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+.opsiBenar .opsiMark {
+  color: #16a34a;
+}
+
+.opsiSalah {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+  color: #7f1d1d;
+}
+
+.opsiSalah .opsiLetter {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.opsiSalah .opsiMark {
+  color: #dc2626;
+}
+
+/* ---------- Pembahasan ---------- */
+
+.pembahasan {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.pembahasanLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 6px;
+  font-weight: 800;
+}
+
+.soalBenar .pembahasanLabel {
+  color: var(--color-success);
+}
+
+.soalSalah .pembahasanLabel {
+  color: var(--color-danger);
+}
+
+/* ---------- Aksi ---------- */
+
+.aksiBar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(8px);
+}
+
+.aksiBar .status {
+  margin-top: 6px;
+}
+
+.aksi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* ---------- Skor ---------- */
+
+.skor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid rgba(79, 70, 229, 0.16);
+  border-radius: var(--radius-lg);
+  background-image: linear-gradient(
+    135deg,
+    rgba(234, 235, 255, 0.85),
+    rgba(255, 255, 255, 0.9)
+  );
+}
+
+.skorRing {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-primary) calc(var(--nilai, 0) * 1%),
+    var(--color-surface-sunken) 0
+  );
+  position: relative;
+}
+
+.skorRing::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+}
+
+.skorAngka {
+  position: relative;
+  color: var(--color-primary);
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.skorAngka small {
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.skorInfo {
+  flex: 1;
+  min-width: 220px;
+}
+
+.skorLabel {
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skorMessage {
+  margin-top: 4px;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.saved {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+@media (max-width: 520px) {
+  .start {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .start .btn {
+    width: 100%;
+  }
+
+  .skor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="judul-foto-3">
+  <title id="judul-foto-3">Ilustrasi perpustakaan sekolah</title>
+  <defs>
+    <linearGradient id="dinding-3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffbeb" />
+      <stop offset="1" stop-color="#fef3c7" />
+    </linearGradient>
+    <linearGradient id="kaca-3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dbeafe" />
+      <stop offset="1" stop-color="#eff6ff" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#dinding-3)" />
+  <rect y="520" width="1200" height="155" fill="#fde68a" />
+  <rect y="520" width="1200" height="9" fill="#f59e0b" opacity="0.45" />
+
+  <!-- Jendela tengah -->
+  <rect x="500" y="86" width="200" height="250" rx="16" fill="url(#kaca-3)" stroke="#fbbf24" stroke-width="7" />
+  <rect x="596" y="86" width="8" height="250" fill="#fbbf24" opacity="0.75" />
+  <rect x="500" y="204" width="200" height="8" fill="#fbbf24" opacity="0.75" />
+  <circle cx="650" cy="132" r="20" fill="#fde68a" />
+
+  <!-- Rak buku kiri -->
+  <rect x="52" y="104" width="392" height="420" rx="12" fill="#b45309" />
+  <rect x="68" y="120" width="360" height="388" rx="8" fill="#92400e" />
+  <g>
+    <rect x="68" y="214" width="360" height="10" fill="#78350f" />
+    <rect x="68" y="312" width="360" height="10" fill="#78350f" />
+    <rect x="68" y="410" width="360" height="10" fill="#78350f" />
+  </g>
+  <g>
+    <rect x="86" y="146" width="24" height="66" rx="4" fill="#f87171" />
+    <rect x="116" y="154" width="20" height="58" rx="4" fill="#60a5fa" />
+    <rect x="142" y="140" width="26" height="72" rx="4" fill="#fbbf24" />
+    <rect x="174" y="150" width="22" height="62" rx="4" fill="#34d399" />
+    <rect x="202" y="144" width="28" height="68" rx="4" fill="#a78bfa" />
+    <rect x="236" y="156" width="20" height="56" rx="4" fill="#fb923c" />
+    <rect x="262" y="142" width="24" height="70" rx="4" fill="#f472b6" />
+    <rect x="292" y="152" width="22" height="60" rx="4" fill="#38bdf8" />
+
+    <rect x="86" y="240" width="22" height="70" rx="4" fill="#fcd34d" />
+    <rect x="114" y="248" width="26" height="62" rx="4" fill="#f87171" />
+    <rect x="146" y="236" width="20" height="74" rx="4" fill="#34d399" />
+    <rect x="172" y="246" width="24" height="64" rx="4" fill="#a78bfa" />
+    <rect x="202" y="238" width="22" height="72" rx="4" fill="#60a5fa" />
+    <rect x="230" y="250" width="26" height="60" rx="4" fill="#fb923c" />
+    <rect x="262" y="242" width="20" height="68" rx="4" fill="#f472b6" />
+
+    <rect x="86" y="338" width="26" height="70" rx="4" fill="#7dd3fc" />
+    <rect x="118" y="346" width="20" height="62" rx="4" fill="#fbbf24" />
+    <rect x="144" y="332" width="24" height="76" rx="4" fill="#f87171" />
+    <rect x="174" y="344" width="22" height="64" rx="4" fill="#34d399" />
+    <rect x="202" y="336" width="26" height="72" rx="4" fill="#a78bfa" />
+    <rect x="234" y="348" width="20" height="60" rx="4" fill="#60a5fa" />
+  </g>
+
+  <!-- Rak buku kanan -->
+  <rect x="756" y="104" width="392" height="420" rx="12" fill="#b45309" />
+  <rect x="772" y="120" width="360" height="388" rx="8" fill="#92400e" />
+  <g>
+    <rect x="772" y="214" width="360" height="10" fill="#78350f" />
+    <rect x="772" y="312" width="360" height="10" fill="#78350f" />
+    <rect x="772" y="410" width="360" height="10" fill="#78350f" />
+  </g>
+  <g>
+    <rect x="790" y="148" width="26" height="64" rx="4" fill="#60a5fa" />
+    <rect x="822" y="140" width="20" height="72" rx="4" fill="#fbbf24" />
+    <rect x="848" y="154" width="24" height="58" rx="4" fill="#f87171" />
+    <rect x="878" y="146" width="22" height="66" rx="4" fill="#34d399" />
+    <rect x="906" y="142" width="28" height="70" rx="4" fill="#a78bfa" />
+    <rect x="940" y="152" width="20" height="60" rx="4" fill="#fb923c" />
+    <rect x="966" y="144" width="24" height="68" rx="4" fill="#f472b6" />
+    <rect x="996" y="156" width="22" height="56" rx="4" fill="#38bdf8" />
+
+    <rect x="790" y="240" width="24" height="70" rx="4" fill="#fcd34d" />
+    <rect x="820" y="248" width="22" height="62" rx="4" fill="#f87171" />
+    <rect x="848" y="236" width="26" height="74" rx="4" fill="#34d399" />
+    <rect x="880" y="246" width="20" height="64" rx="4" fill="#a78bfa" />
+    <rect x="906" y="238" width="24" height="72" rx="4" fill="#60a5fa" />
+    <rect x="936" y="250" width="22" height="60" rx="4" fill="#fb923c" />
+
+    <rect x="790" y="338" width="20" height="70" rx="4" fill="#f472b6" />
+    <rect x="816" y="348" width="26" height="60" rx="4" fill="#7dd3fc" />
+    <rect x="848" y="332" width="22" height="76" rx="4" fill="#fbbf24" />
+    <rect x="876" y="344" width="24" height="64" rx="4" fill="#f87171" />
+    <rect x="906" y="336" width="20" height="72" rx="4" fill="#34d399" />
+  </g>
+
+  <!-- Meja baca -->
+  <ellipse cx="600" cy="600" rx="280" ry="34" fill="#f59e0b" opacity="0.22" />
+  <rect x="380" y="486" width="440" height="24" rx="10" fill="#a16207" />
+  <rect x="412" y="510" width="16" height="82" rx="7" fill="#854d0e" />
+  <rect x="772" y="510" width="16" height="82" rx="7" fill="#854d0e" />
+
+  <!-- Buku terbuka di meja -->
+  <path d="M520 486c26-10 54-10 80 0v-30c-26-10-54-10-80 0Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" />
+  <path d="M600 456v30" stroke="#cbd5e1" stroke-width="2" />
+  <path d="M530 470c18-5 36-5 54 0M530 478c18-5 36-5 54 0" stroke="#a5b4fc" stroke-width="2" fill="none" />
+
+  <!-- Lampu gantung -->
+  <rect x="596" y="0" width="8" height="58" fill="#78350f" />
+  <path d="M566 58h68l14 28h-96Z" fill="#fbbf24" />
+  <ellipse cx="600" cy="92" rx="30" ry="8" fill="#fde68a" opacity="0.8" />
+
+  <!-- Tanaman -->
+  <rect x="1048" y="494" width="44" height="34" rx="8" fill="#f59e0b" />
+  <path d="M1070 494c-22-18-28-40-18-62 18 8 28 30 18 62Z" fill="#34d399" />
+  <path d="M1070 494c20-14 26-36 16-58-16 8-26 28-16 58Z" fill="#10b981" />
+</svg>

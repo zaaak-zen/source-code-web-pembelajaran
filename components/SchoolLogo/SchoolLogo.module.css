@@ -1,0 +1,31 @@
+/*
+ * SchoolLogo styles
+ *
+ * Komponen ini hanya mengatur isi kotak logo. Ukuran kotak ditentukan lewat
+ * prop `size`, sedangkan latar, padding, dan bayangan diatur oleh class
+ * tambahan dari pemakai (mis. .brandLogo di Navbar).
+ */
+
+.logo {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 30%;
+  background-image: var(--gradient-primary);
+  color: #ffffff;
+}

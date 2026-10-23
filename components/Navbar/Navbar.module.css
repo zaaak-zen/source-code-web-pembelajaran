@@ -1,0 +1,230 @@
+/*
+ * Navbar styles
+ *
+ * Catatan: nama class memakai camelCase karena CSS Modules Next.js
+ * mengekspor nama apa adanya (exportLocalsConvention: "asIs").
+ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(246, 247, 253, 0.82);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: saturate(140%) blur(14px);
+  transition: background-color 180ms ease, border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.headerScrolled {
+  background-color: rgba(255, 255, 255, 0.86);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 8px 24px -18px rgba(23, 26, 51, 0.5);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--content-width);
+  min-height: var(--header-height);
+  margin: 0 auto;
+  padding: 10px clamp(20px, 4vw, 32px);
+}
+
+/* ---------- Logo ---------- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brandLogo {
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-xs);
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.brandName {
+  font-size: 1.06rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.brandSchool {
+  max-width: 18ch;
+  overflow: hidden;
+  color: var(--color-text-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .brandSchool {
+    display: none;
+  }
+}
+
+/* ---------- Tautan desktop ---------- */
+
+.links {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 15px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
+}
+
+.linkActive {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.linkActive:hover {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+/* ---------- Aksi kanan ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 20px -14px rgba(79, 70, 229, 0.9);
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.cta:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.menuToggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 13px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.menuToggle:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-primary);
+}
+
+/* ---------- Menu mobile ---------- */
+
+.menuPanel {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 8px clamp(20px, 4vw, 32px) 20px;
+}
+
+.menuNav {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.menuNav .link {
+  justify-content: flex-start;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+}
+
+.menuAkun {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 46px;
+  margin-top: 6px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- Desktop ---------- */
+
+@media (min-width: 768px) {
+  .links {
+    display: flex;
+  }
+
+  .cta {
+    display: inline-flex;
+  }
+
+  .menuToggle {
+    display: none;
+  }
+
+  .menuPanel {
+    display: none;
+  }
+}

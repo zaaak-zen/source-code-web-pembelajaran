@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="judul-logo">
+  <title id="judul-logo">Contoh logo sekolah</title>
+  <defs>
+    <linearGradient id="latar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f46e5" />
+      <stop offset="1" stop-color="#1e1b4b" />
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="120" height="120" rx="34" fill="url(#latar)" />
+  <rect x="10" y="10" width="108" height="108" rx="28" fill="none" stroke="#fbbf24" stroke-width="2.5" opacity="0.85" />
+
+  <!-- Topi wisuda -->
+  <path d="M64 30 96 44 64 58 32 44Z" fill="#fbbf24" />
+  <path d="M46 51v11c0 6 8 11 18 11s18-5 18-11V51" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <path d="M96 44v18" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" />
+  <circle cx="96" cy="66" r="3.5" fill="#fbbf24" />
+
+  <!-- Buku terbuka -->
+  <path d="M32 82c10-4 20-4 32 2 12-6 22-6 32-2v20c-10-4-20-4-32 2-12-6-22-6-32-2Z" fill="#ffffff" />
+  <path d="M64 84v20" stroke="#c7d2fe" stroke-width="3" />
+  <path d="M42 88c6-2 12-2 18 1M42 94c6-2 12-2 18 1M68 89c6-3 12-3 18-1M68 95c6-3 12-3 18-1" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" />
+</svg>
