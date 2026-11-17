@@ -1,0 +1,114 @@
+/*
+ * Gaya PilihSiswa
+ *
+ * Kotak pencarian memakai kelas `authInput` dari globals.css agar tampil sama
+ * dengan kolom lain di halaman absen. Yang ditambahkan di sini hanya bagian
+ * yang khas komponen ini: daftar saran, nama terpilih, dan tombol lepas.
+ */
+
+.bungkus {
+  display: block;
+}
+
+.kotakCari {
+  position: relative;
+}
+
+/* Daftar saran menggantung di atas konten berikutnya, jadi tidak menggeser
+   tata letak saat muncul. */
+.daftar {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  max-height: 17rem;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-surface);
+  box-shadow: 0 14px 28px rgb(0 0 0 / 12%);
+}
+
+.pilihan {
+  display: block;
+  width: 100%;
+  padding: 9px 11px;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pilihan:hover,
+.pilihanSorot {
+  background-color: var(--color-accent-soft, var(--color-surface-muted));
+}
+
+.kosong {
+  padding: 11px;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/* Nomor urut nama ganda, mis. "(2 dari 3)". Dibuat lebih redup agar nama
+   siswa tetap yang paling menonjol. */
+.urut {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+/* Nama yang sudah dipilih: menggantikan kotak pencarian supaya siswa tidak
+   bisa memilih dua nama sekaligus. */
+.terpilih {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-surface-muted);
+}
+
+.terpilihNama {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.lepas {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.lepas:hover,
+.lepas:focus-visible {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+@media (max-width: 480px) {
+  .daftar {
+    max-height: 13rem;
+  }
+}

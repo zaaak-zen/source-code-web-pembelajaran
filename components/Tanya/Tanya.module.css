@@ -1,11 +1,17 @@
-/* Styling komponen Tanya AI. Token desain diambil dari app/globals.css. */
+/*
+ * Styling komponen Tanya AI — editorial.
+ *
+ * Percakapan disusun sebagai baris dengan garis pemisah, bukan gelembung
+ * mengambang. Tidak ada gradien dan tidak ada bayangan.
+ */
 
 .tanya {
-  padding: clamp(22px, 3vw, 30px);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-sm);
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 2px solid var(--color-text);
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .header {
@@ -16,30 +22,31 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-primary);
-  font-size: 0.73rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
+  color: var(--color-accent-text);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .title {
-  margin-top: 8px;
-  font-size: clamp(1.22rem, 2.4vw, 1.5rem);
+  margin-top: 10px;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.018em;
 }
 
 .meta {
   margin-top: 8px;
   color: var(--color-text-muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.65;
 }
 
 .status {
   color: var(--color-text-muted);
-  font-size: 0.86rem;
+  font-size: 0.85rem;
 }
 
 /* ---------- Keadaan kosong ---------- */
@@ -47,154 +54,174 @@
 .kosong {
   display: grid;
   justify-items: start;
-  gap: 8px;
-  padding: 22px;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-muted);
+  gap: 6px;
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px dashed var(--color-border-strong);
+  border-bottom: 1px dashed var(--color-border-strong);
+  border-radius: 0;
+  background-color: transparent;
 }
 
 .kosongIcon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
+  display: block;
+  width: auto;
+  height: auto;
   margin-bottom: 4px;
-  border-radius: 15px;
-  background-color: var(--color-surface);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-xs);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-accent-text);
+  box-shadow: none;
 }
 
 .kosongTitle {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .saran {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 6px;
+  display: grid;
+  gap: 0;
+  margin-top: 8px;
+  width: 100%;
+  border-top: var(--rule);
 }
 
 .saranTombol {
-  padding: 8px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface);
+  padding: 10px 0;
+  border: 0;
+  border-bottom: var(--rule);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-text-muted);
-  font-size: 0.84rem;
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 500;
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--transition), color var(--transition),
-    background-color var(--transition);
+  transition: color var(--transition);
 }
 
 .saranTombol:hover {
-  border-color: var(--color-primary);
-  background-color: var(--color-primary-soft);
-  color: var(--color-primary);
+  background-color: transparent;
+  color: var(--color-accent-text);
 }
 
 /* ---------- Percakapan ---------- */
 
 .daftar {
   display: grid;
-  gap: 16px;
+  gap: 0;
   margin: 0 0 18px;
   padding: 0;
+  border-top: 2px solid var(--color-text);
   list-style: none;
 }
 
 .baris {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
   gap: 10px;
+  padding: 14px 0;
+  border-bottom: var(--rule);
 }
 
 .barisPengguna {
-  flex-direction: row-reverse;
+  grid-template-columns: minmax(0, 1fr) 28px;
+}
+
+.barisPengguna .avatar {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.barisPengguna .bubbleWrap {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
 }
 
 .avatar {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  font-size: 0.8rem;
-  font-weight: 800;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
 }
 
 .avatarPengguna {
-  background-color: var(--color-text);
-  color: #ffffff;
+  border-color: var(--color-text);
+  background-color: transparent;
+  color: var(--color-text);
 }
 
 .avatarAI {
-  background-color: var(--color-primary-soft);
-  color: var(--color-primary);
+  background-color: transparent;
+  color: var(--color-accent-text);
 }
 
 .bubbleWrap {
-  max-width: min(100%, 46rem);
-}
-
-.barisPengguna .bubbleWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  max-width: none;
 }
 
 .pesanLabel {
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   color: var(--color-text-soft);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .pesan {
-  padding: 12px 15px;
-  border-radius: 4px 16px 16px 16px;
+  max-width: 66ch;
+  padding: 0;
+  border-radius: 0;
   font-size: 0.94rem;
-  line-height: 1.65;
+  line-height: 1.7;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
 .pesanPengguna {
-  border-radius: 16px 4px 16px 16px;
-  background-color: var(--color-primary);
-  color: #ffffff;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-text);
+  font-weight: 500;
 }
 
 .pesanAsisten {
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface-muted);
-  color: var(--color-text);
+  border: 0;
+  background-color: transparent;
+  color: var(--color-text-muted);
 }
 
 .pesanMenunggu {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 13px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px 16px 16px 16px;
-  background-color: var(--color-surface-muted);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .titik {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: var(--color-accent);
   animation: denyut 1.1s ease-in-out infinite;
 }
 
@@ -240,29 +267,29 @@
 .composer {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
-  padding: 8px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background-color: transparent;
+  transition: border-color var(--transition);
 }
 
 .composer:focus-within {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+  border-color: var(--color-text);
+  box-shadow: none;
 }
 
 .input {
   flex: 1;
-  min-height: 48px;
+  min-height: 46px;
   max-height: 180px;
   padding: 10px 12px;
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   background-color: transparent;
   color: var(--color-text);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   line-height: 1.55;
   resize: vertical;
 }
@@ -286,23 +313,24 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
+  margin: 0;
   padding: 0;
-  border: 1px solid var(--color-primary);
-  border-radius: 12px;
-  background-color: var(--color-primary);
-  color: #ffffff;
+  border: 0;
+  border-left: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-text);
   cursor: pointer;
-  transition: background-color var(--transition), opacity var(--transition),
-    transform var(--transition);
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .kirim:hover:not(:disabled) {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 .kirim:disabled {
-  opacity: 0.45;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
@@ -316,29 +344,30 @@
 
 .hint {
   color: var(--color-text-soft);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
 }
 
 .panjang {
   color: var(--color-text-soft);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   font-variant-numeric: tabular-nums;
 }
 
 .reset {
   padding: 0;
   border: 0;
+  border-bottom: 1px solid var(--color-border-strong);
   background: transparent;
   color: var(--color-text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: underline;
+  font-size: 0.76rem;
+  font-weight: 500;
   cursor: pointer;
 }
 
 .reset:hover:not(:disabled) {
-  color: var(--color-primary);
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .reset:disabled {
@@ -350,10 +379,11 @@
 
 .galat {
   margin-bottom: 14px;
-  padding: 12px 14px;
-  border: 1px solid rgba(185, 28, 28, 0.18);
-  border-radius: var(--radius-md);
-  background-color: var(--color-danger-soft);
+  padding: 10px 0 10px 12px;
+  border: 0;
+  border-left: 3px solid var(--color-danger);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-danger);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }

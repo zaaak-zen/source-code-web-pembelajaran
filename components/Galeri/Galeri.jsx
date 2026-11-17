@@ -4,7 +4,7 @@
  * Galeri (carousel foto)
  *
  * Tanggung jawab: menampilkan daftar foto sekolah yang bergeser otomatis
- * dari kiri ke kanan, lengkap dengan tombol navigasi dan jeda otomatis.
+ * dari kiri ke kanan. Navigasi hanya lewat titik di bawah foto.
  *
  * CARA EDIT:
  * - Daftar foto diatur di config/education.js pada bagian `galeri.foto`.
@@ -12,21 +12,17 @@
  *
  * Catatan perilaku:
  * - Otomatis berhenti saat kursor di atas galeri, saat fokus keyboard berada
- *   di dalam galeri, saat tab browser tidak aktif, atau bila pengguna memilih
- *   "kurangi gerakan" di sistemnya.
- * - Tombol "Jeda otomatis" memberi kontrol eksplisit (WCAG 2.2.2).
+ *   di dalam galeri, atau saat tab browser tidak aktif.
+ * - Preferensi sistem "kurangi gerakan" sengaja TIDAK diikuti: carousel ini
+ *   diminta tetap bergerak walau "Animation effects" dimatikan di Windows,
+ *   jadi transisi dan auto-geser tetap hidup. Berhentinya auto-geser tetap
+ *   bisa dilakukan pengunjung lewat hover/fokus.
  * - Track memakai slide kembar di kedua ujung agar perpindahan tetap mulus
  *   saat kembali ke foto pertama.
  */
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconPause,
-  IconPlay,
-} from "@/components/Icons/Icons";
 import styles from "./Galeri.module.css";
 
 const JEDA = 5200; // jarak antar-foto (ms)
@@ -39,10 +35,8 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
   // (urutan terbalik), jumlah + 1 = kembaran foto terakhir.
   const [posisi, setPosisi] = useState(jumlah);
   const [tanpaTransisi, setTanpaTransisi] = useState(false);
-  const [berhenti, setBerhenti] = useState(false);
   const [hover, setHover] = useState(false);
   const [fokus, setFokus] = useState(false);
-  const [redupGerak, setRedupGerak] = useState(false);
   const [tersembunyi, setTersembunyi] = useState(false);
   const [interaksi, setInteraksi] = useState(0);
 
@@ -58,8 +52,13 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
         ? jumlah - 1
         : jumlah - posisi;
 
-  // Setelah slide kembaran tampil, lompat tanpa animasi ke slide asli yang
-  // isinya sama. Mata pengguna tidak melihat lompatan karena gambarnya identik.
+  // Saat posisi menyentuh slide kembar (0 = kembaran foto pertama,
+  // jumlah + 1 = kembaran foto terakhir), lompat tanpa animasi ke slide asli
+  // yang isinya sama sebelum penonton sempat melihatnya. Karena foto kembar
+  // dan foto asli identik, perpindahan ini tidak terlihat oleh mata.
+  //
+  // Auto-geser sengaja hanya melewati slide asli: dari foto 1 langsung ke
+  // slide kembar di ujung kanan (posisi jumlah + 1), bukan ke posisi 0.
   useEffect(() => {
     if (posisi !== 0 && posisi !== jumlah + 1) return;
 
@@ -80,15 +79,6 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
     };
   }, [posisi, jumlah]);
 
-  // Hormati preferensi sistem: kurangi gerakan.
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const perbarui = () => setRedupGerak(media.matches);
-    perbarui();
-    media.addEventListener("change", perbarui);
-    return () => media.removeEventListener("change", perbarui);
-  }, []);
-
   // Jangan berjalan saat tab browser tidak terlihat.
   useEffect(() => {
     const perbarui = () => setTersembunyi(document.hidden);
@@ -97,28 +87,25 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
     return () => document.removeEventListener("visibilitychange", perbarui);
   }, []);
 
-  const jedaAktif =
-    berhenti || hover || fokus || redupGerak || tersembunyi || jumlah < 2;
+  // Sengaja TIDAK membaca `prefers-reduced-motion`: carousel ini diminta tetap
+  // bergerak walau pengguna mematikan "Animation effects" di sistemnya.
+  // Yang tetap dijeda hanya interaksi langsung pengguna (kursor di atas
+  // galeri, fokus keyboard di dalamnya) dan tab yang tidak terlihat.
+  const jedaAktif = hover || fokus || tersembunyi || jumlah < 2;
 
+  // Auto-geser memakai `setInterval`, jadi penjadwalannya tidak ikut di-reset
+  // setiap `posisi` berubah. Ketika posisi mencapai 1 (foto pertama), timer
+  // berikutnya mengirim track ke slide kembaran di ujung kanan sekaligus;
+  // `tanpaTransisi` di effect bawah membuat perpindahan itu tidak terlihat.
   useEffect(() => {
     if (jedaAktif) return;
 
     const timer = setInterval(() => {
-      setPosisi((nilai) => Math.max(0, nilai - 1));
+      setPosisi((nilai) => (nilai <= 1 ? jumlah + 1 : nilai - 1));
     }, JEDA);
 
     return () => clearInterval(timer);
-  }, [jedaAktif, interaksi]);
-
-  function maju() {
-    setInteraksi((nilai) => nilai + 1);
-    setPosisi((nilai) => Math.max(0, nilai - 1));
-  }
-
-  function mundur() {
-    setInteraksi((nilai) => nilai + 1);
-    setPosisi((nilai) => Math.min(jumlah + 1, nilai + 1));
-  }
+  }, [jedaAktif, interaksi, jumlah]);
 
   function keFoto(indeks) {
     setInteraksi((nilai) => nilai + 1);
@@ -150,6 +137,17 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
           style={{ transform: `translateX(-${posisi * 100}%)` }}
         >
           {track.map((item, indeksTrack) => {
+            // Foto yang sedang dilihat tidak pernah disembunyikan dari pembaca
+            // layar, berapa pun posisi track saat itu. `posisi` sesaat bisa
+            // bernilai 0 atau jumlah + 1 (slide kembar); slide kembar dianggap
+            // mewakili foto aslinya, jadi tidak ada foto yang hilang dari
+            // urutan baca.
+            const kembarPertama = indeksTrack === 0 && posisi === 0;
+            const kembarTerakhir =
+              indeksTrack === jumlah + 1 && posisi === jumlah + 1;
+            const sedangTampil =
+              indeksTrack === posisi || kembarPertama || kembarTerakhir;
+
             const indeksAsli =
               indeksTrack === 0
                 ? 0
@@ -164,14 +162,13 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${indeksAsli + 1} dari ${jumlah}`}
-                aria-hidden={indeksTrack !== posisi}
+                aria-hidden={!sedangTampil}
               >
                 <Image
                   src={item.src}
                   alt={item.alt || ""}
                   fill
                   sizes="(min-width: 1024px) 1100px, 100vw"
-                  unoptimized
                   draggable={false}
                   className={styles.gambar}
                 />
@@ -187,24 +184,6 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
             );
           })}
         </div>
-
-        <button
-          type="button"
-          className={`${styles.panah} ${styles.panahKiri}`}
-          onClick={mundur}
-          aria-label="Foto sebelumnya"
-        >
-          <IconArrowLeft size={20} />
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.panah} ${styles.panahKanan}`}
-          onClick={maju}
-          aria-label="Foto berikutnya"
-        >
-          <IconArrowRight size={20} />
-        </button>
 
         <p className={styles.status}>
           Foto {aktif + 1} dari {jumlah}
@@ -228,16 +207,6 @@ export default function Galeri({ foto = [], label = "Galeri foto sekolah" }) {
             />
           ))}
         </div>
-
-        <button
-          type="button"
-          className={styles.jeda}
-          onClick={() => setBerhenti((nilai) => !nilai)}
-          aria-pressed={berhenti}
-        >
-          {berhenti ? <IconPlay size={15} /> : <IconPause size={15} />}
-          {berhenti ? "Putar otomatis" : "Jeda otomatis"}
-        </button>
       </div>
     </div>
   );

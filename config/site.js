@@ -6,10 +6,10 @@
  * (itu ada di config/education.js).
  */
 const siteConfig = {
-  name: "CodeSpring",
-  tagline: "Belajar Informatika untuk Siswa SMP dan SMK",
+  name: "Warung Kode",
+  tagline: "Belajar Informatika untuk Siswa SMK",
   description:
-    "Platform pembelajaran Informatika untuk siswa SMP dan SMK dengan materi, latihan soal, kuis, dan latihan algoritma.",
+    "Platform pembelajaran Informatika untuk siswa SMK dengan materi, latihan soal, kuis, dan latihan algoritma.",
   locale: "id_ID",
   language: "id",
 };

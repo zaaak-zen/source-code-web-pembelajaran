@@ -25,7 +25,8 @@
   place-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 30%;
-  background-image: var(--gradient-primary);
-  color: #ffffff;
+  border-radius: 0;
+  background-color: var(--color-text);
+  background-image: none;
+  color: var(--color-background);
 }

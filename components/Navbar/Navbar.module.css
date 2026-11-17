@@ -1,36 +1,32 @@
 /*
- * Navbar styles
+ * Navbar styles — editorial
  *
- * Catatan: nama class memakai camelCase karena CSS Modules Next.js
- * mengekspor nama apa adanya (exportLocalsConvention: "asIs").
+ * Header kertas solid dengan satu garis bawah. Tanpa bayangan, tanpa pil,
+ * tanpa blur. Menu aktif ditandai garis bawah tinta.
  */
 
 .header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(246, 247, 253, 0.82);
-  border-bottom: 1px solid transparent;
-  backdrop-filter: saturate(140%) blur(14px);
-  transition: background-color 180ms ease, border-color 180ms ease,
-    box-shadow 180ms ease;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  transition: border-color 160ms var(--ease);
 }
 
 .headerScrolled {
-  background-color: rgba(255, 255, 255, 0.86);
-  border-bottom-color: var(--color-border);
-  box-shadow: 0 8px 24px -18px rgba(23, 26, 51, 0.5);
+  border-bottom-color: var(--color-border-strong);
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
   max-width: var(--content-width);
   min-height: var(--header-height);
   margin: 0 auto;
-  padding: 10px clamp(20px, 4vw, 32px);
+  padding: 10px clamp(20px, 4vw, 40px);
 }
 
 /* ---------- Logo ---------- */
@@ -38,45 +34,48 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
+  flex-shrink: 0;
   color: var(--color-text);
   text-decoration: none;
 }
 
 .brandLogo {
-  padding: 3px;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: var(--shadow-xs);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .brandText {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
   min-width: 0;
   line-height: 1.15;
 }
 
 .brandName {
-  font-size: 1.06rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .brandSchool {
-  max-width: 18ch;
+  max-width: 20ch;
   overflow: hidden;
-  color: var(--color-text-soft);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.07em;
   text-overflow: ellipsis;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 460px) {
   .brandSchool {
     display: none;
   }
@@ -87,37 +86,78 @@
 .links {
   display: none;
   align-items: center;
-  gap: 4px;
+  gap: 26px;
   margin-left: auto;
-  margin-right: 8px;
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 0 15px;
-  border-radius: var(--radius-pill);
+  min-height: 44px;
+  border-bottom: 1px solid transparent;
   color: var(--color-text-muted);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.84rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: color 160ms var(--ease), border-color 160ms var(--ease);
 }
 
 .link:hover {
-  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom-color: var(--color-border-strong);
   color: var(--color-text);
 }
 
 .linkActive {
-  background-color: var(--color-primary-soft);
-  color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .linkActive:hover {
-  background-color: var(--color-primary-soft);
-  color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* ---------- Item dengan submenu ---------- */
+
+.group {
+  position: relative;
+}
+
+.groupToggle {
+  gap: 5px;
+  padding: 0;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.chevron {
+  transition: transform 160ms var(--ease);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.submenuOpen {
+  display: flex;
+}
+
+.subLink {
+  justify-content: flex-start;
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 0.86rem;
 }
 
 /* ---------- Aksi kanan ---------- */
@@ -125,7 +165,7 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .cta {
@@ -133,21 +173,28 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 40px;
-  padding: 0 18px;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-primary);
-  color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 700;
+  min-height: 44px;
+  padding: 0 15px;
+  border: 1px solid var(--color-text);
+  border-radius: 0;
+  background-color: var(--color-text);
+  color: var(--color-background);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
   text-decoration: none;
-  box-shadow: 0 10px 20px -14px rgba(79, 70, 229, 0.9);
-  transition: background-color 180ms ease, transform 180ms ease;
+  text-transform: uppercase;
+  box-shadow: none;
+  transition: background-color 160ms var(--ease), border-color 160ms var(--ease),
+    color 160ms var(--ease);
 }
 
 .cta:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: #ffffff;
+  transform: none;
 }
 
 .menuToggle {
@@ -156,17 +203,17 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--color-border);
-  border-radius: 13px;
-  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-text);
   cursor: pointer;
-  transition: border-color 180ms ease, color 180ms ease;
+  transition: border-color 160ms var(--ease), color 160ms var(--ease);
 }
 
 .menuToggle:hover {
-  border-color: var(--color-border-strong);
-  color: var(--color-primary);
+  border-color: var(--color-text);
+  color: var(--color-accent-text);
 }
 
 /* ---------- Menu mobile ---------- */
@@ -174,23 +221,56 @@
 .menuPanel {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 8px clamp(20px, 4vw, 32px) 20px;
+  padding: 0 clamp(20px, 4vw, 40px) 18px;
+  border-top: 1px solid var(--color-border);
 }
 
 .menuNav {
   display: grid;
-  gap: 4px;
-  padding: 10px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-md);
+  border-top: 0;
+  background-color: transparent;
 }
 
 .menuNav .link {
   justify-content: flex-start;
+  min-height: 48px;
+  padding: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.menuNav .linkActive {
+  border-bottom-color: var(--color-accent);
+}
+
+/* Submenu versi mobile: daftar bertingkat, bukan panel melayang. */
+.menuNav .group {
+  position: static;
+  display: grid;
+}
+
+.menuNav .groupToggle {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.menuNav .submenu {
+  position: static;
+  gap: 0;
+  width: auto;
+  padding: 0 0 8px 14px;
+  border: 0;
+  box-shadow: none;
+}
+
+.menuNav .submenu .subLink {
   min-height: 44px;
-  border-radius: var(--radius-sm);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.98rem;
+  font-weight: 500;
 }
 
 .menuAkun {
@@ -199,21 +279,38 @@
   justify-content: space-between;
   gap: 8px;
   min-height: 46px;
-  margin-top: 6px;
-  padding: 0 16px;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-primary);
-  color: #ffffff;
-  font-size: 0.92rem;
-  font-weight: 700;
+  margin-top: 14px;
+  padding: 0 15px;
+  border-radius: 0;
+  background-color: var(--color-text);
+  color: var(--color-background);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 /* ---------- Desktop ---------- */
 
-@media (min-width: 768px) {
+@media (min-width: 820px) {
   .links {
     display: flex;
+  }
+
+  /* Submenu desktop: panel melayang di bawah item. */
+  .submenuOpen {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    z-index: 60;
+    width: max-content;
+    min-width: 190px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 8%);
+    transform: translateX(-50%);
   }
 
   .cta {

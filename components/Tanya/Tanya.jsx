@@ -111,8 +111,9 @@ export default function Tanya({ kelas, materi, judul }) {
           Tanya AI tentang {judul}
         </h2>
         <p className={styles.meta}>
-          AI menjawab berdasarkan isi materi ini. Jawaban bisa keliru, jadi
-          periksa kembali dengan materi dan penjelasan guru.
+          AI menjawab singkat berdasarkan isi materi ini: inti jawaban dulu,
+          lalu alasannya. Jawaban bisa keliru, jadi periksa kembali dengan materi
+          dan penjelasan guru.
         </p>
       </header>
 

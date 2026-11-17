@@ -1,7 +1,7 @@
 /*
- * Galeri styles
+ * Galeri styles — editorial
  *
- * Token desain diambil dari app/globals.css.
+ * Bingkai tajam, keterangan solid, kontrol persegi. Tidak ada gradien.
  * Durasi transisi di sini harus sama dengan konstanta DURASI di Galeri.jsx.
  */
 
@@ -13,14 +13,29 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 10;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-text);
+  border-radius: 0;
   background-color: var(--color-surface-muted);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
+/*
+ * `width: 100%` di sini bukan hiasan — tanpa itu track menyusut jadi selebar
+ * satu slide.
+ *
+ * `.viewport` memakai `aspect-ratio` + `overflow: hidden` sehingga tingginya
+ * pasti, tetapi lebarnya mengikuti induk. `.track` sebagai flex container
+ * dengan anak `flex: 0 0 100%` akan menyelesaikan persentase itu terhadap
+ * lebar track sendiri, bukan terhadap viewport. Akibatnya track berhenti di
+ * lebar satu slide dan kelima foto bertumpuk; `translateX` lalu menggeser
+ * ruang kosong, bukan foto, sehingga yang terlihat hanya kedipan.
+ *
+ * Dengan lebar eksplisit di kedua elemen, acuannya menjadi konkret:
+ * 1 slide = 1x lebar track, dan 5 slide = 5x lebar track.
+ */
 .track {
   display: flex;
+  width: 100%;
   height: 100%;
   transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: transform;
@@ -33,6 +48,7 @@
 .slide {
   position: relative;
   flex: 0 0 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -46,95 +62,54 @@
 .keterangan {
   position: absolute;
   inset: auto 0 0 0;
-  padding: 52px 24px 20px;
-  background-image: linear-gradient(
-    to top,
-    rgba(15, 23, 42, 0.78),
-    rgba(15, 23, 42, 0)
-  );
-  color: #ffffff;
+  padding: 12px 16px;
+  background-color: rgba(23, 21, 18, 0.86);
+  background-image: none;
+  color: var(--color-background);
 }
 
 .keteranganJudul {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-/* ---------- Tombol panah ---------- */
-
-.panah {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.86);
-  color: var(--color-text);
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-  transform: translateY(-50%);
-  transition: background-color 180ms ease, color 180ms ease,
-    transform 180ms ease;
-}
-
-.panah:hover {
-  background-color: #ffffff;
-  color: var(--color-primary);
-  transform: translateY(-50%) scale(1.04);
-}
-
-.panahKiri {
-  left: 14px;
-}
-
-.panahKanan {
-  right: 14px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 /* ---------- Penghitung foto ---------- */
 
 .status {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   z-index: 2;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(15, 23, 42, 0.62);
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 700;
-  backdrop-filter: blur(6px);
+  padding: 4px 9px;
+  border-radius: 0;
+  background-color: rgba(23, 21, 18, 0.86);
+  color: var(--color-background);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  backdrop-filter: none;
 }
 
 /* ---------- Kontrol di bawah foto ---------- */
 
 .kontrol {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .titik {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 0;
 }
 
 .dot {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
   background: none;
@@ -143,41 +118,20 @@
 
 .dot::after {
   content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: var(--radius-pill);
+  width: 7px;
+  height: 7px;
+  border-radius: 0;
   background-color: var(--color-border-strong);
-  transition: width 220ms ease, background-color 220ms ease;
+  transition: width 200ms ease, background-color 200ms ease;
 }
 
 .dot:hover::after {
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
 }
 
 .dotAktif::after {
-  width: 24px;
-  background-color: var(--color-primary);
-}
-
-.jeda {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 36px;
-  padding: 0 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface);
-  color: var(--color-text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color 180ms ease, color 180ms ease;
-}
-
-.jeda:hover {
-  border-color: var(--color-border-strong);
-  color: var(--color-primary);
+  width: 20px;
+  background-color: var(--color-accent);
 }
 
 @media (min-width: 768px) {
@@ -186,24 +140,22 @@
   }
 
   .keterangan {
-    padding: 64px 32px 26px;
+    padding: 14px 20px;
   }
 
   .keteranganJudul {
-    font-size: 1.1rem;
-  }
-
-  .panahKiri {
-    left: 20px;
-  }
-
-  .panahKanan {
-    right: 20px;
+    font-size: 0.88rem;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    transition: none;
-  }
-}
+/*
+ * Catatan: di sini TIDAK ada `@media (prefers-reduced-motion: reduce)` yang
+ * mematikan transisi track.
+ *
+ * Aturan semacam itu tampak benar, tetapi bertabrakan dengan blok
+ * `prefers-reduced-motion` di app/globals.css yang membuat transisi jadi
+ * 0,01 ms. Carousel ini memang diminta tetap bergerak walau pengguna
+ * mematikan "Animation effects" di sistemnya, jadi transisinya dibiarkan
+ * hidup; pengecualiannya ada di app/globals.css pada selector
+ * `[class*="Galeri_track"]`.
+ */

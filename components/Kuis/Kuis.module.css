@@ -1,11 +1,12 @@
-/* Styling komponen Kuis. Token desain diambil dari app/globals.css. */
+/* Styling komponen Kuis — editorial. Tanpa gradien, tanpa kartu mengambang. */
 
 .kuis {
-  padding: clamp(22px, 3vw, 30px);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-sm);
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 2px solid var(--color-text);
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .header {
@@ -25,38 +26,41 @@
   align-items: center;
   gap: 6px;
   color: var(--color-accent-text);
-  font-size: 0.73rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .counter {
-  padding: 4px 11px;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface-muted);
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-text-muted);
-  font-size: 0.74rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
 }
 
 .title {
-  margin-top: 8px;
-  font-size: clamp(1.22rem, 2.4vw, 1.5rem);
+  margin-top: 10px;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.018em;
 }
 
 .meta {
   margin-top: 8px;
   color: var(--color-text-muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.65;
 }
 
 .status {
   color: var(--color-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
 }
 
 /* ---------- Mulai ---------- */
@@ -66,22 +70,23 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  padding: 20px;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-muted);
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px dashed var(--color-border-strong);
+  border-bottom: 1px dashed var(--color-border-strong);
+  border-radius: 0;
+  background-color: transparent;
 }
 
 .startIcon {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
+  display: block;
+  width: auto;
+  height: auto;
   flex-shrink: 0;
-  border-radius: 16px;
-  background-color: var(--color-surface);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-xs);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-accent-text);
+  box-shadow: none;
 }
 
 .startTextWrap {
@@ -90,14 +95,62 @@
 }
 
 .startTitle {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .startText {
   margin-top: 2px;
   color: var(--color-text-muted);
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   line-height: 1.6;
+}
+
+/* ---------- Form nama ---------- */
+
+.startForm {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 220px;
+}
+
+.namaLabel {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.59rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.namaInput {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.namaInput::placeholder {
+  color: var(--color-text-soft);
+}
+
+.namaInput:focus-visible {
+  border-color: var(--color-text);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.namaHint {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 /* ---------- Status memuat ---------- */
@@ -106,19 +159,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 22px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-muted);
+  padding: 18px 0;
+  border-top: var(--rule);
+  border-bottom: var(--rule);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-text-muted);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .spinner {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: 2px solid var(--color-border-strong);
-  border-top-color: var(--color-primary);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: putar 700ms linear infinite;
 }
@@ -137,12 +191,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 16px;
-  border: 1px solid rgba(185, 28, 28, 0.18);
-  border-radius: var(--radius-md);
-  background-color: var(--color-danger-soft);
+  padding: 12px 0 12px 14px;
+  border: 0;
+  border-left: 3px solid var(--color-danger);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--color-danger);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 /* ---------- Progres ---------- */
@@ -156,53 +211,120 @@
 
 .progress {
   flex: 1;
-  height: 8px;
+  height: 3px;
   overflow: hidden;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-surface-muted);
+  border-radius: 0;
+  background-color: var(--color-surface-sunken);
 }
 
 .progressFill {
   display: block;
   height: 100%;
-  border-radius: inherit;
-  background-image: var(--gradient-primary);
+  border-radius: 0;
+  background-color: var(--color-accent);
+  background-image: none;
   transition: width 240ms var(--ease);
 }
 
 .progressText {
   color: var(--color-text-muted);
-  font-size: 0.78rem;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Daftar soal ---------- */
+/* ---------- Titik navigasi soal ---------- */
 
-.soalList {
-  display: grid;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.soalNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
 }
 
-.soal {
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  transition: border-color var(--transition), background-color var(--transition);
+.dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px;
+  background-color: transparent;
+  transition: transform var(--transition), background-color var(--transition),
+    border-color var(--transition);
+}
+
+.dotAktif {
+  transform: scale(1.35);
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+}
+
+.dotTerjawab {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+}
+
+.dotBenar {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
+}
+
+.dotSalah {
+  border-color: var(--color-danger);
+  background-color: var(--color-danger);
+}
+
+/* ---------- Kartu soal ---------- */
+
+.soalKartu {
+  padding: 22px 0 4px;
+  border-top: 2px solid var(--color-text);
+  animation: muncul 280ms var(--ease);
+}
+
+@keyframes muncul {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.soalBadge {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.soalBadgeNomor {
+  color: var(--color-accent-text);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.soalBadgeLabel {
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .soalBenar {
-  border-color: #86efac;
-  background-color: #f7fdf9;
+  border-top-color: var(--color-success);
 }
 
 .soalSalah {
-  border-color: #fca5a5;
-  background-color: #fffafa;
+  border-top-color: var(--color-danger);
 }
 
 .fieldset {
@@ -213,55 +335,49 @@
 }
 
 .legend {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
+  display: block;
+  margin-bottom: 16px;
   padding: 0;
-  font-weight: 700;
-  line-height: 1.55;
-}
-
-.legendIndex {
-  display: grid;
-  place-items: center;
-  width: 27px;
-  height: 27px;
-  flex-shrink: 0;
-  margin-top: 1px;
-  border-radius: 9px;
-  background-color: var(--color-primary-soft);
-  color: var(--color-primary);
-  font-size: 0.8rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
 }
 
 .pilihan {
   display: grid;
-  gap: 8px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
 .opsi {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  padding: 11px 13px;
-  border: 1px solid var(--color-border);
+  align-items: center;
+  gap: 13px;
+  min-height: 54px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   background-color: var(--color-surface);
   cursor: pointer;
-  transition: border-color var(--transition), background-color var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition), background-color var(--transition),
+    border-color var(--transition), box-shadow var(--transition);
 }
 
 .opsi:hover {
-  border-color: var(--color-border-strong);
-  background-color: rgba(238, 241, 251, 0.55);
+  border-color: var(--color-text);
+  background-color: var(--color-surface-muted);
+  transform: translateX(3px);
+}
+
+.opsi:active {
+  transform: translateX(3px) scale(0.995);
 }
 
 .opsi:focus-within {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -276,33 +392,49 @@
 .opsiLetter {
   display: grid;
   place-items: center;
-  width: 27px;
-  height: 27px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-  border-radius: 50%;
-  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-background);
   color: var(--color-text-muted);
+  font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 800;
-  transition: background-color var(--transition), color var(--transition);
+  font-weight: 600;
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition);
 }
 
 .opsiText {
   flex: 1;
-  padding-top: 2px;
-  font-size: 0.94rem;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .opsiMark {
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  margin-top: 1px;
   border-radius: 50%;
   background-color: currentColor;
+  animation: pop 260ms var(--ease);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .opsiMark svg {
@@ -310,94 +442,154 @@
 }
 
 .opsiDipilih {
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
   background-color: var(--color-primary-soft);
+  box-shadow: inset 0 0 0 1px var(--color-text);
 }
 
 .opsiDipilih .opsiLetter {
-  background-color: var(--color-primary);
-  color: #ffffff;
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 .opsiBenar {
-  border-color: #16a34a;
-  background-color: #f0fdf4;
-  color: #14532d;
+  border-color: var(--color-success);
+  background-color: var(--color-success-soft);
+  color: var(--color-success);
 }
 
 .opsiBenar .opsiLetter {
-  background-color: #16a34a;
+  border-color: var(--color-success);
+  background-color: var(--color-success);
   color: #ffffff;
 }
 
 .opsiBenar .opsiMark {
-  color: #16a34a;
+  color: var(--color-success);
 }
 
 .opsiSalah {
-  border-color: #dc2626;
-  background-color: #fef2f2;
-  color: #7f1d1d;
+  border-color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger);
 }
 
 .opsiSalah .opsiLetter {
-  background-color: #dc2626;
+  border-color: var(--color-danger);
+  background-color: var(--color-danger);
   color: #ffffff;
 }
 
 .opsiSalah .opsiMark {
-  color: #dc2626;
+  color: var(--color-danger);
 }
 
-/* ---------- Pembahasan ---------- */
+/* ---------- Umpan balik jawaban ---------- */
 
-.pembahasan {
-  margin-top: 14px;
-  padding-top: 13px;
-  border-top: 1px dashed var(--color-border);
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.65;
+.feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 16px;
+  padding: 15px 17px;
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  animation: umpan 320ms var(--ease);
 }
 
-.pembahasanLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-right: 6px;
-  font-weight: 800;
+@keyframes umpan {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.soalBenar .pembahasanLabel {
+.feedbackBenar {
+  border-color: var(--color-success);
+  background-color: var(--color-success-soft);
   color: var(--color-success);
 }
 
-.soalSalah .pembahasanLabel {
+.feedbackSalah {
+  border-color: var(--color-danger);
+  background-color: var(--color-danger-soft);
   color: var(--color-danger);
+}
+
+.feedbackIkon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  animation: pop 360ms var(--ease);
+}
+
+.feedbackIsi {
+  flex: 1;
+  min-width: 0;
+}
+
+.feedbackJudul {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.feedbackTeks {
+  margin-top: 5px;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
 
 /* ---------- Aksi ---------- */
 
 .aksiBar {
   position: sticky;
-  bottom: 12px;
+  bottom: 0;
   z-index: 5;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px 0;
+  border: 0;
+  border-top: 2px solid var(--color-text);
+  border-radius: 0;
+  background-color: var(--color-background);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.navBar {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 20px;
-  padding: 14px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(8px);
+}
+
+.navTengah {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navPosisi {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .aksiBar .status {
-  margin-top: 6px;
+  margin-top: 0;
 }
 
 .aksi {
@@ -413,53 +605,67 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 22px;
+  gap: 26px;
   margin-top: 20px;
-  padding: 22px;
-  border: 1px solid rgba(79, 70, 229, 0.16);
-  border-radius: var(--radius-lg);
-  background-image: linear-gradient(
-    135deg,
-    rgba(234, 235, 255, 0.85),
-    rgba(255, 255, 255, 0.9)
-  );
+  padding: 22px 0;
+  border: 0;
+  border-top: 2px solid var(--color-text);
+  border-bottom: var(--rule);
+  border-radius: 0;
+  background-color: transparent;
+  background-image: none;
 }
 
 .skorRing {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 108px;
-  height: 108px;
+  width: 118px;
+  height: 118px;
   flex-shrink: 0;
+  border: 0;
   border-radius: 50%;
   background: conic-gradient(
-    var(--color-primary) calc(var(--nilai, 0) * 1%),
+    var(--skor-warna, var(--color-accent)) calc(var(--nilai, 0) * 1%),
     var(--color-surface-sunken) 0
   );
-  position: relative;
+  animation: isiCincin 900ms var(--ease);
 }
 
-.skorRing::before {
+@keyframes isiCincin {
+  from {
+    --nilai: 0;
+  }
+}
+
+.skorRing::after {
   content: "";
   position: absolute;
   inset: 9px;
   border-radius: 50%;
-  background-color: var(--color-surface);
+  background-color: var(--color-background);
+}
+
+.skorRing::before {
+  display: none;
 }
 
 .skorAngka {
   position: relative;
-  color: var(--color-primary);
-  font-size: 1.85rem;
-  font-weight: 800;
+  z-index: 1;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1;
 }
 
 .skorAngka small {
-  font-size: 0.85rem;
-  font-weight: 700;
-  opacity: 0.7;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  opacity: 0.65;
 }
 
 .skorInfo {
@@ -468,17 +674,19 @@
 }
 
 .skorLabel {
-  color: var(--color-primary);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  color: var(--color-accent-text);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .skorMessage {
   margin-top: 4px;
-  font-size: 1.06rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -487,10 +695,124 @@
   align-items: center;
   gap: 5px;
   color: var(--color-success);
-  font-weight: 700;
+  font-weight: 600;
+}
+
+/* ---------- Papan skor ---------- */
+
+.papanSkor {
+  margin-top: 18px;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid var(--color-text);
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.papanSkorHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: var(--rule);
+  background-color: transparent;
+}
+
+.papanSkorTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.papanSkorPosisi {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
+.papanSkorScroll {
+  overflow-x: auto;
+}
+
+.papanSkorTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.papanSkorTable th,
+.papanSkorTable td {
+  padding: 10px 12px;
+  border-bottom: var(--rule);
+  text-align: left;
+}
+
+.papanSkorTable th:first-child,
+.papanSkorTable td:first-child {
+  padding-left: 0;
+}
+
+.papanSkorTable thead th {
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.papanSkorTable tbody tr:last-child th,
+.papanSkorTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.papanSkorNo {
+  width: 44px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
+.papanSkorSaya {
+  background-color: var(--color-surface-muted);
+}
+
+.papanSkorBadge {
+  margin-left: 8px;
+  padding: 2px 6px;
+  border: 1px solid var(--color-text);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.papanSkorEmpty {
+  padding: 16px 0;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
 }
 
 @media (max-width: 520px) {
+  .startForm {
+    width: 100%;
+  }
+
   .start {
     flex-direction: column;
     align-items: flex-start;
@@ -503,5 +825,28 @@
   .skor {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* Tombol Sebelumnya/Lanjut berbagi lebar agar mudah dijangkau jempol. */
+  .navBar {
+    gap: 8px;
+  }
+
+  .navBar .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navTengah {
+    flex: 1;
+  }
+
+  .navTengah .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .legend {
+    font-size: 1.08rem;
   }
 }

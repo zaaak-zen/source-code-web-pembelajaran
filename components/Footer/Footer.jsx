@@ -6,7 +6,8 @@
  * CARA EDIT:
  * - Teks hak cipta diatur di bawah.
  * - Nama website diambil dari config/site.js.
- * - Daftar kelas diambil otomatis dari config/education.js.
+ * - Profil sekolah diambil dari config/education.js.
+ * - Kolom tautan mengikuti menu di config/navigation.js.
  * - Tampilan diatur di Footer.module.css.
  *
  * Footer ini Server Component karena tidak ada interaksi pengguna.
@@ -15,13 +16,12 @@
 import Link from "next/link";
 import siteConfig from "@/config/site";
 import educationConfig from "@/config/education";
-import SchoolLogo from "@/components/SchoolLogo/SchoolLogo";
+import navigationConfig from "@/config/navigation";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   // EDIT: teks di belakang tahun (kosongkan "" jika tidak perlu)
   const rights = "Seluruh hak cipta dilindungi.";
-  const jenjang = educationConfig.jenjang[0] ?? null;
 
   return (
     <footer className={styles.footer}>
@@ -32,7 +32,6 @@ export default function Footer() {
             className={styles.brand}
             aria-label={`${siteConfig.name} — beranda`}
           >
-            <SchoolLogo size={42} decorative className={styles.brandLogo} />
             <span className={styles.brandName}>{siteConfig.name}</span>
           </Link>
           <p className={styles.description}>{siteConfig.description}</p>
@@ -44,64 +43,34 @@ export default function Footer() {
           </p>
         </div>
 
-        {jenjang ? (
-          <nav className={styles.col} aria-labelledby="footer-belajar">
-            <h2 className={styles.colTitle} id="footer-belajar">
-              Belajar
-            </h2>
-            <ul className={styles.list}>
-              {jenjang.kelas.map((kelas) => (
-                <li key={kelas.slug}>
-                  <Link
-                    className={styles.link}
-                    href={`/${jenjang.slug}/${kelas.slug}`}
-                  >
-                    {kelas.nama}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ) : null}
-
-        <nav className={styles.col} aria-labelledby="footer-akun">
-          <h2 className={styles.colTitle} id="footer-akun">
-            Akun
-          </h2>
-          <ul className={styles.list}>
-            <li>
-              <Link className={styles.link} href="/login">
-                Masuk
-              </Link>
-            </li>
-            <li>
-              <Link className={styles.link} href="/register">
-                Daftar
-              </Link>
-            </li>
-            <li>
-              <Link className={styles.link} href="/dashboard">
-                Dashboard
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
+        {/*
+          Kolom tautan footer disusun otomatis dari config/navigation.js,
+          yaitu menu yang sama dengan Navbar. Jadi saat menu navbar berubah,
+          footer ikut menyesuaikan tanpa perlu diedit terpisah.
+        */}
         <nav className={styles.col} aria-labelledby="footer-jelajahi">
           <h2 className={styles.colTitle} id="footer-jelajahi">
-            Jelajahi
+            Tautan
           </h2>
           <ul className={styles.list}>
-            <li>
-              <Link className={styles.link} href="/">
-                Beranda
-              </Link>
-            </li>
-            <li>
-              <Link className={styles.link} href="/smk">
-                Materi SMK
-              </Link>
-            </li>
+            {navigationConfig.links.map((item) => (
+              <li key={item.href}>
+                <Link className={styles.link} href={item.href}>
+                  {item.label}
+                </Link>
+                {item.children?.length ? (
+                  <ul className={styles.subList}>
+                    {item.children.map((anak) => (
+                      <li key={anak.href}>
+                        <Link className={styles.subLink} href={anak.href}>
+                          {anak.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </li>
+            ))}
             <li>
               <a className={styles.link} href="#main-content">
                 Kembali ke atas

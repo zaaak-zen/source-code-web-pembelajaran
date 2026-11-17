@@ -1,17 +1,23 @@
-# CodeSpring — Project Structure & Component Standards
+# Warung Kode — Project Structure & Component Standards
 
 ## 1. Project Overview
 
-CodeSpring adalah platform pembelajaran berbasis website yang berfokus secara eksklusif pada mata pelajaran Informatika untuk siswa SMP dan SMK.
+Warung Kode adalah platform pembelajaran berbasis website yang berfokus secara eksklusif pada mata pelajaran Informatika untuk siswa SMK.
+
+Lingkup proyek hanya jenjang SMK. Jenjang lain tidak termasuk cakupan dan tidak direncanakan.
 
 Platform dirancang untuk menyediakan:
 - Materi Informatika berdasarkan jenjang dan kelas.
 - Pembelajaran interaktif.
 - Latihan soal dan kuis.
 - Latihan algoritma dan pemrograman.
-- Dashboard siswa.
-- Pelacakan progres belajar.
-- Autentikasi akun untuk penyimpanan progres.
+- Pembantu belajar berbasis AI per materi.
+- Absensi siswa yang dicatat guru.
+
+Platform tidak memakai akun siswa. Tidak ada pendaftaran, dashboard siswa,
+maupun pelacakan progres per siswa. Satu-satunya akun adalah akun guru untuk
+membuka panel `/guru`, dibuat di Supabase Auth (email + password), dan sesinya
+berakhir 2 jam setelah login.
 
 ### Technology Stack
 
@@ -26,7 +32,7 @@ Jangan menginstal atau mengganti teknologi, dependensi, maupun library tanpa mem
 
 ## 2. Ownership and Decision Authority
 
-Pemilik proyek memiliki kendali penuh terhadap struktur dan arsitektur CodeSpring.
+Pemilik proyek memiliki kendali penuh terhadap struktur dan arsitektur Warung Kode.
 
 Pemilik proyek menentukan:
 - Struktur folder.
@@ -159,7 +165,7 @@ AI boleh memperbaiki isi komponen yang ditugaskan selama:
 
 ## 6. Configuration File Standards
 
-CodeSpring menggunakan file konfigurasi terpisah berdasarkan kategori dan tanggung jawab.
+Warung Kode menggunakan file konfigurasi terpisah berdasarkan kategori dan tanggung jawab.
 
 Nama file dan lokasi setiap konfigurasi ditentukan oleh pemilik proyek. Daftar di bawah merupakan kategori yang dapat digunakan, bukan perintah untuk langsung membuat semua file.
 
@@ -196,7 +202,7 @@ Aturan:
 
 ## 7. Next.js Standards
 
-CodeSpring menggunakan Next.js.
+Warung Kode menggunakan Next.js.
 
 Sebelum mengembangkan halaman atau navigasi, AI harus memeriksa versi Next.js dan router yang benar-benar digunakan oleh proyek.
 
@@ -266,13 +272,13 @@ Jika menemukan masalah di luar tugas:
 
 ## 9. UI/UX Consistency
 
-Seluruh halaman CodeSpring harus mengikuti spesifikasi UI/UX yang telah disetujui.
+Seluruh halaman Warung Kode harus mengikuti spesifikasi UI/UX yang telah disetujui.
 
 Prinsip:
 - Minimalis, terang, modern, dan futuristik.
 - Konsisten pada warna, tipografi, jarak, dan komponen.
 - Responsif pada desktop, tablet, dan mobile.
-- Mudah dinavigasi oleh siswa SMP dan SMK.
+- Mudah dinavigasi oleh siswa SMK.
 - Memiliki kondisi loading, empty, error, dan success yang sesuai.
 - Memiliki fokus keyboard dan label aksesibilitas yang jelas.
 
@@ -327,7 +333,7 @@ Setelah selesai, laporkan:
 
 ## 12. Final Rule
 
-README ini merupakan pedoman utama untuk struktur dan tanggung jawab file CodeSpring.
+README ini merupakan pedoman utama untuk struktur dan tanggung jawab file Warung Kode.
 
 **Pemilik proyek menentukan struktur; AI mengimplementasikan isi file yang ditugaskan. Perubahan struktur harus memperoleh persetujuan eksplisit sebelum diterapkan.**
 

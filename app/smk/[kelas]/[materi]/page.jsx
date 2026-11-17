@@ -3,23 +3,19 @@
  *
  * Tanggung jawab: menampilkan isi satu materi Informatika.
  *
- * CARA EDIT:
- * - Judul, deskripsi, durasi, dan isi materi diambil dari config/education.js
- *   (bagian "jenjang" -> "smk" -> "kelas" -> "materi").
- * - Isi materi berupa array "konten" dengan blok bertipe:
- *     tujuan | teks | daftar | kode | catatan
- *   Penjelasan format ada di bagian atas config/education.js.
- * - Tipe blok yang tidak dikenali diabaikan, sehingga tidak merusak halaman.
+ * Data materi dibaca dari tabel `materi` dan dikelola guru lewat /guru/materi.
+ * Isinya berupa array blok bertipe tujuan | teks | daftar | kode | catatan;
+ * blok yang tidak dikenali diabaikan agar halaman tetap stabil.
  */
 
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import {
-  getJenjangBySlug,
-  getKelasBySlug,
-  getMateriBySlug,
-} from "@/config/education";
-import Kuis from "@/components/Kuis/Kuis";
+import { notFound, redirect } from "next/navigation";
+import { getJenjangBySlug, getKelasBySlug } from "@/config/education";
+import { ambilMateri, ambilMateriKelas } from "@/lib/materi/kelas";
+import { punyaAksesKelas } from "@/lib/kelas/akses";
+import { sudahAbsenHariIni } from "@/lib/kelas/absensi";
+import { TIPE_BERKAS, formatUkuran } from "@/lib/materi/berkas";
+import { urlBerkas } from "@/lib/materi/storage";
 import Tanya from "@/components/Tanya/Tanya";
 import {
   IconAlert,
@@ -27,26 +23,19 @@ import {
   IconArrowRight,
   IconClock,
   IconCode,
+  IconDownload,
+  IconFile,
   IconPlay,
   IconTarget,
 } from "@/components/Icons/Icons";
 
 const JENJANG_SLUG = "smk";
 
-export function generateStaticParams() {
-  const jenjang = getJenjangBySlug(JENJANG_SLUG);
-  if (!jenjang) return [];
+// Halaman membaca cookie token kelas, jadi selalu dirender per permintaan.
+export const dynamic = "force-dynamic";
 
-  return jenjang.kelas.flatMap((kelas) =>
-    kelas.materi.map((materi) => ({
-      kelas: kelas.slug,
-      materi: materi.slug,
-    }))
-  );
-}
-
-export function generateMetadata({ params }) {
-  const materi = getMateriBySlug(JENJANG_SLUG, params.kelas, params.materi);
+export async function generateMetadata({ params }) {
+  const materi = await ambilMateri(params.kelas, params.materi);
   if (!materi) return { title: "Materi tidak ditemukan" };
   return { title: materi.judul, description: materi.deskripsi };
 }
@@ -152,14 +141,24 @@ function labelBlok(blok, index) {
 
 /* ---------- Halaman ---------- */
 
-export default function MateriPage({ params }) {
+export default async function MateriPage({ params }) {
   const jenjang = getJenjangBySlug(JENJANG_SLUG);
   const kelas = getKelasBySlug(JENJANG_SLUG, params.kelas);
-  const materi = getMateriBySlug(JENJANG_SLUG, params.kelas, params.materi);
+  const materi = await ambilMateri(params.kelas, params.materi);
 
   if (!jenjang || !kelas || !materi) notFound();
 
-  const daftarMateri = kelas.materi;
+  // Materi hanya terbuka setelah token kelasnya dimasukkan di /smk.
+  if (!(await punyaAksesKelas(kelas.slug))) redirect("/smk?galat=akses");
+
+  if (!(await sudahAbsenHariIni(kelas.slug))) {
+    const lanjut = `/smk/${kelas.slug}/${materi.slug}`;
+    redirect(
+      `/smk/${kelas.slug}/absen?lanjut=${encodeURIComponent(lanjut)}`
+    );
+  }
+
+  const daftarMateri = (await ambilMateriKelas(kelas.slug)) ?? [];
   const urutan = daftarMateri.findIndex((item) => item.slug === materi.slug);
   const sebelumnya = urutan > 0 ? daftarMateri[urutan - 1] : null;
   const berikutnya =
@@ -168,6 +167,25 @@ export default function MateriPage({ params }) {
       : null;
   const konten = Array.isArray(materi.konten) ? materi.konten : [];
   const adaKuis = materi.kuis?.jumlahSoal > 0;
+  const kuisHref = `/${jenjang.slug}/${kelas.slug}/${materi.slug}/kuis`;
+
+  /*
+   * Signed URL dibuat di server karena bucket privat. PDF mendapat dua tautan:
+   * satu untuk dipratinjau di iframe, satu dengan header unduhan. Word/PPT
+   * hanya mendapat tautan unduhan karena browser tidak bisa merendernya.
+   */
+  const berkas = Array.isArray(materi.berkas) ? materi.berkas : [];
+  const berkasTampil = (
+    await Promise.all(
+      berkas.map(async (item) => ({
+        ...item,
+        url: await urlBerkas(item.path, { unduh: item.nama }),
+        urlPratinjau: TIPE_BERKAS[item.tipe]?.pratinjau
+          ? await urlBerkas(item.path)
+          : null,
+      }))
+    )
+  ).filter((item) => item.url);
 
   // Hanya embed ID YouTube yang bentuknya valid (11 karakter).
   const videoId =
@@ -182,6 +200,9 @@ export default function MateriPage({ params }) {
       id: `bagian-${index}`,
       label: labelBlok(blok, index),
     })),
+    ...(berkasTampil.length > 0
+      ? [{ id: "berkas-materi", label: "Berkas materi" }]
+      : []),
     { id: "tanya-ai", label: "Tanya AI" },
     ...(adaKuis ? [{ id: "kuis", label: "Kuis" }] : []),
   ];
@@ -221,6 +242,12 @@ export default function MateriPage({ params }) {
               <span className="chip">
                 <IconTarget size={15} />
                 {materi.kuis.jumlahSoal} soal kuis
+              </span>
+            ) : null}
+            {berkasTampil.length > 0 ? (
+              <span className="chip">
+                <IconFile size={15} />
+                {berkasTampil.length} berkas
               </span>
             ) : null}
             <span className="chip">
@@ -293,6 +320,66 @@ export default function MateriPage({ params }) {
               ))
             )}
 
+            {/* Berkas lampiran: PDF bisa dipratinjau, Word/PPT diunduh. */}
+            {berkasTampil.length > 0 ? (
+              <section
+                id="berkas-materi"
+                className="materiSection"
+                aria-labelledby="berkas-materi-title"
+              >
+                <p className="eyebrow">Unduhan</p>
+                <h2 id="berkas-materi-title" className="materiHeading">
+                  Berkas materi
+                </h2>
+
+                <ul className="berkasList">
+                  {berkasTampil.map((item) => (
+                    <li key={item.path} className="berkasItem">
+                      <div className="berkasInfo">
+                        <span className="berkasIkon" aria-hidden="true">
+                          <IconFile size={20} />
+                        </span>
+                        <div>
+                          <p className="berkasNama">{item.nama}</p>
+                          <p className="berkasMeta">
+                            {TIPE_BERKAS[item.tipe]?.label ?? "Berkas"} &middot;{" "}
+                            {formatUkuran(item.ukuran)}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="berkasActions">
+                        <a
+                          className="btn btnSecondary btnSm"
+                          href={item.url}
+                          rel="noopener"
+                        >
+                          <IconDownload size={16} />
+                          Unduh
+                        </a>
+                      </div>
+
+                      {item.urlPratinjau ? (
+                        <details className="berkasPratinjau">
+                          <summary>Pratinjau PDF</summary>
+                          <iframe
+                            src={item.urlPratinjau}
+                            title={`Pratinjau ${item.nama}`}
+                            loading="lazy"
+                          />
+                        </details>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="berkasCatatan">
+                  Tautan unduhan berlaku sekitar 2 jam. Muat ulang halaman ini
+                  bila tautan sudah kedaluwarsa.
+                </p>
+              </section>
+            ) : null}
+
             {/* AI pembantu belajar: menjawab berdasarkan materi ini. */}
             <div id="tanya-ai" className="materiSection">
               <Tanya
@@ -302,14 +389,23 @@ export default function MateriPage({ params }) {
               />
             </div>
 
+            {/* Kuis punya halaman sendiri agar materi tetap ringkas. */}
             {adaKuis ? (
               <div id="kuis" className="materiSection">
-                <Kuis
-                  kelas={kelas.slug}
-                  materi={materi.slug}
-                  judul={materi.judul}
-                  jumlahSoal={materi.kuis.jumlahSoal}
-                />
+                <div className="card">
+                  <p className="eyebrow">Kuis</p>
+                  <h2 className="materiHeading">
+                    {materi.kuis.jumlahSoal} soal pilihan ganda
+                  </h2>
+                  <p className="materiParagraf">
+                    Kuis dibuka di halaman terpisah. Isi nama, jawab semua soal,
+                    lalu lihat skor, pembahasan, dan papan skor materi ini.
+                  </p>
+                  <Link className="btn btnPrimary" href={kuisHref}>
+                    Kerjakan kuis
+                    <IconArrowRight size={17} />
+                  </Link>
+                </div>
               </div>
             ) : null}
 
@@ -359,9 +455,9 @@ export default function MateriPage({ params }) {
 
             {adaKuis ? (
               <div className="tocAction">
-                <a className="btn btnPrimary btnSm btnBlock" href="#kuis">
+                <Link className="btn btnPrimary btnSm btnBlock" href={kuisHref}>
                   Kerjakan kuis
-                </a>
+                </Link>
               </div>
             ) : null}
           </aside>

@@ -21,3 +21,15 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Pengaturan lokal alat bantu AI.
+# Seluruh folder diabaikan karena isinya bersifat per-mesin: izin khusus
+# (settings.local.json), git worktree sementara, dan cache skill. Menyimpan
+# worktree di dalam folder ini berbahaya bila ikut ter-commit, sebab isinya
+# salinan utuh proyek pada branch lain.
+.claude/
+
+# Catatan skill yang dipasang di mesin ini (Claude Code). Bukan bagian proyek.
+skills-lock.json
+
+.backup-asli/

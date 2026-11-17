@@ -1,99 +1,126 @@
 /*
- * Footer styles
+ * Footer styles — editorial
  *
- * Token desain diambil dari app/globals.css.
+ * Footer tinta penuh: kontras kuat, tanpa kartu, tanpa bayangan.
  */
 
 .footer {
   margin-top: auto;
-  border-top: 1px solid var(--color-border);
-  background-color: rgba(255, 255, 255, 0.72);
+  border-top: 1px solid var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 .inner {
   display: grid;
-  gap: 32px;
+  gap: 34px;
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: clamp(36px, 5vw, 56px) clamp(20px, 4vw, 32px) 28px;
+  padding: clamp(38px, 5vw, 60px) clamp(20px, 4vw, 40px) 30px;
 }
 
 /* ---------- Kolom identitas ---------- */
 
 .brandCol {
-  max-width: 24rem;
+  max-width: 26rem;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--color-text);
+  color: var(--color-background);
   text-decoration: none;
 }
 
-.brandLogo {
-  padding: 3px;
-  border: 1px solid var(--color-border);
-  border-radius: 13px;
-  background-color: #ffffff;
-}
-
 .brandName {
-  font-size: 1.04rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .description {
-  margin-top: 14px;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
+  margin-top: 16px;
+  color: #cdc5b6;
+  font-size: 0.85rem;
   line-height: 1.7;
 }
 
 .school {
-  margin-top: 14px;
-  color: var(--color-text);
-  font-size: 0.84rem;
-  font-weight: 700;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(244, 240, 230, 0.18);
+  color: var(--color-background);
+  font-size: 0.82rem;
+  font-weight: 600;
   line-height: 1.6;
 }
 
 .schoolAddress {
   display: block;
   margin-top: 2px;
-  color: var(--color-text-soft);
-  font-size: 0.8rem;
-  font-weight: 500;
+  color: #a9a193;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
 }
 
 /* ---------- Kolom tautan ---------- */
 
 .colTitle {
-  color: var(--color-text-soft);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
+  color: #d8a48d;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
 .list {
   display: grid;
-  gap: 8px;
-  margin-top: 14px;
+  gap: 4px;
+  margin-top: 12px;
 }
 
 .link {
-  color: var(--color-text-muted);
-  font-size: 0.87rem;
-  font-weight: 500;
+  display: inline-block;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  color: #cdc5b6;
+  font-size: 0.84rem;
+  font-weight: 400;
   text-decoration: none;
-  transition: color 180ms ease;
+  transition: color 160ms var(--ease), border-color 160ms var(--ease);
 }
 
 .link:hover {
-  color: var(--color-primary);
+  border-bottom-color: #d8a48d;
+  color: var(--color-background);
+}
+
+/* Anak menu (mis. Kelas 10/11/12) — menjorok sedikit ke dalam. */
+.subList {
+  display: grid;
+  gap: 2px;
+  margin: 2px 0 6px 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(244, 240, 230, 0.18);
+}
+
+.subLink {
+  display: inline-block;
+  padding: 2px 0;
+  color: #a9a193;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 160ms var(--ease);
+}
+
+.subLink:hover {
+  color: var(--color-background);
 }
 
 /* ---------- Garis bawah ---------- */
@@ -101,14 +128,17 @@
 .bottom {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 18px clamp(20px, 4vw, 32px) 26px;
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-soft);
-  font-size: 0.8rem;
+  padding: 16px clamp(20px, 4vw, 40px) 24px;
+  border-top: 1px solid rgba(244, 240, 230, 0.18);
+  color: #a9a193;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 700px) {
   .inner {
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    /* Dua kolom: identitas sekolah (lebar) + kolom tautan. */
+    grid-template-columns: 1.9fr 1fr;
   }
 }
